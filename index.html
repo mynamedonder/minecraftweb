@@ -1,0 +1,39 @@
+public void init()
+  {
+    this.canvas = new MinecraftApplet.1(this);
+    boolean bool = false;
+    if (getParameter("fullscreen") != null)
+      bool = getParameter("fullscreen").equalsIgnoreCase("true");
+    this.minecraft = new l(this.canvas, this, getWidth(), getHeight(), bool);
+    this.minecraft.i = getDocumentBase().getHost();
+    if (getDocumentBase().getPort() > 0)
+    {
+      l tmp95_92 = this.minecraft;
+      tmp95_92.i = (tmp95_92.i + ":" + getDocumentBase().getPort());
+    }
+    if ((getParameter("username") != null) && (getParameter("sessionid") != null))
+    {
+      this.minecraft.h = new a(getParameter("username"), getParameter("sessionid"));
+      if (getParameter("mppass") != null)
+        this.minecraft.h.d = getParameter("mppass");
+      this.minecraft.h.e = "true".equals(getParameter("haspaid"));
+    }
+    if ((getParameter("loadmap_user") != null) && (getParameter("loadmap_id") != null))
+    {
+      this.minecraft.t = getParameter("loadmap_user");
+      this.minecraft.u = Integer.parseInt(getParameter("loadmap_id"));
+    }
+    else if ((getParameter("server") != null) && (getParameter("port") != null))
+    {
+      int i = Integer.parseInt(getParameter("port"));
+      String str = getParameter("server");
+      l locall;
+      (locall = this.minecraft).C = str;
+      locall.D = i;
+    }
+    this.minecraft.k = true;
+    setLayout(new BorderLayout());
+    add(this.canvas, "Center");
+    this.canvas.setFocusable(true);
+    validate();
+  }
